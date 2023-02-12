@@ -1,4 +1,4 @@
-<video src="https://github.com/gabriieelreeis/loan-simulations/raw/main/WhatsApp%20Video%202023-02-12%20at%2019.44.13.mp4" controls="controls" style="max-width: 730px;">
+<video src="WhatsApp%20Video%202023-02-12%20at%2019.44.13.mp4" controls="controls" style="max-width: 730px;">
 </video>
 
 ## Como instalar
