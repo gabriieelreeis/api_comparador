@@ -1,3 +1,6 @@
+<video src="https://github.com/gabriieelreeis/loan-simulations/raw/main/WhatsApp%20Video%202023-02-12%20at%2019.44.13.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
 ## Como instalar
 Para o funcionamento da api você precisará ter o Docker ou um servidor local PHP com composer instalado.
 Irei citar como instalar com o Docker, mas você pode facilmente encontrar metodos de instalação utilizando um servidor local no Google.
