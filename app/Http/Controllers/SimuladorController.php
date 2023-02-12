@@ -80,9 +80,9 @@ class SimuladorController extends Controller
         if (!empty($convenios)) {
             $filtrado = [];
             foreach ($this->simulacao as $instituicao => $dados) {
-                $filtrado[$instituicao] = array_filter($dados, function ($item) use ($convenios) {
+                $filtrado[$instituicao] = array_values(array_filter($dados, function ($item) use ($convenios) {
                     return in_array($item['convenio'], $convenios);
-                });
+                }));
 
                 if (empty($filtrado[$instituicao])) {
                     unset($filtrado[$instituicao]);
