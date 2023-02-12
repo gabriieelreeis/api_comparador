@@ -11,11 +11,27 @@ class SimuladorController extends Controller
 
     public function simular(Request $request)
     {
-        $this->carregarArquivoDadosSimulador()
-             ->simularEmprestimo($request->valor_emprestimo)
-             ->filtrarInstituicao($request->instituicoes)
-        ;
-        return \response()->json($this->simulacao);
+
+        // Agora não filtramos as instituições caso não seja informado e
+        // somente simulamos o valor de emprestimo por ser um campo obrigatório
+        $this->carregarArquivoDadosSimulador()->simularEmprestimo($request->valor_emprestimo);
+
+        // Verifico se foi enviado pelo usuario alguma instituição
+        if(isset($request->instituicoes) && !empty($request->instituicoes)) {
+            $this->filtrarInstituicao($request->instituicoes);
+        }
+
+        // Verifico se foi enviado pelo usuario algum convenio
+        if(isset($request->convenios) && !empty($request->convenios)) {
+            $this->filtrarConvenio($request->convenios);
+        }
+
+        // Verifico se foi enviado pelo usuario alguma parcela
+        if(isset($request->parcelas) && !empty($request->parcelas)) {
+            $this->filtrarParcela($request->parcelas);
+        }
+
+        return response()->json($this->simulacao);
     }
 
     private function carregarArquivoDadosSimulador() : self
@@ -56,6 +72,45 @@ class SimuladorController extends Controller
             }
             $this->simulacao = $arrayAux;
         }
+        return $this;
+    }
+
+    private function filtrarConvenio(array $convenios) : self
+    {
+        if (!empty($convenios)) {
+            $filtrado = [];
+            foreach ($this->simulacao as $instituicao => $dados) {
+                $filtrado[$instituicao] = array_filter($dados, function ($item) use ($convenios) {
+                    return in_array($item['convenio'], $convenios);
+                });
+
+                if (empty($filtrado[$instituicao])) {
+                    unset($filtrado[$instituicao]);
+                }
+            }
+            $this->simulacao = $filtrado;
+        }
+        return $this;
+    }
+
+    private function filtrarParcela(int $parcela) : self
+    {
+        if ($parcela <= 0) {
+            return $this;
+        }
+
+        $filtrado = [];
+        foreach ($this->simulacao as $instituicao => $dados) {
+            $filtrado[$instituicao] = array_values(array_filter($dados, function ($item) use ($parcela) {
+                return $item['parcelas'] === $parcela;
+            }));
+
+            if (empty($filtrado[$instituicao])) {
+                unset($filtrado[$instituicao]);
+            }
+        }
+
+        $this->simulacao = $filtrado;
         return $this;
     }
 }
