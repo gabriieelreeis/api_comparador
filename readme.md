@@ -1,6 +1,3 @@
-<center><video src="https://user-images.githubusercontent.com/6256321/218345029-19625f66-77df-4117-bb62-abcc43833404.mp4" controls="controls" style="max-width: 730px;">
-</video></center>
-
 ## Como instalar
 Para o funcionamento da api você precisará ter o Docker ou um servidor local PHP com composer instalado.
 Irei citar como instalar com o Docker, mas você pode facilmente encontrar metodos de instalação utilizando um servidor local no Google.
