@@ -31,6 +31,15 @@ class SimuladorController extends Controller
             $this->filtrarParcela($request->parcelas);
         }
 
+
+        // Dentro do loop, a função usort é chamada para ordenar os dados por parcelas em ordem crescente.
+        foreach ($this->simulacao as $banco => $dados) {
+            usort($dados, function($a, $b) {
+                return $a['parcelas'] <=> $b['parcelas'];
+            });
+            $this->simulacao[$banco] = $dados;
+        }
+
         return response()->json($this->simulacao);
     }
 
