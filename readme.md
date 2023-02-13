@@ -9,6 +9,6 @@ Primeiro baixe e instale o Docker
 
 Após instalado vá a pasta raiz da api.<br />
 Renomeie o arquivo `.env.example` para `.env` e altere as variaveis de acordo com suas configurações locais.<br />
-Agora execute o comando `docker-composer up -d` para instalar as imagens necessários e iniciar o seu container, após iniciado o seu container digite `docker-compose exec app composer install`, após isso digite `docker-compose exec app php artisan key:generate` para gerar a key para seu projeto Laravel e depois digite `docker-compose exec app php artisan config:cache` para carregar suas configurações.<br />
+Agora execute o comando `docker-compose up -d` para instalar as imagens necessários e iniciar o seu container, após iniciado o seu container digite `docker-compose exec app composer install`, após isso digite `docker-compose exec app php artisan key:generate` para gerar a key para seu projeto Laravel e depois digite `docker-compose exec app php artisan config:cache` para carregar suas configurações.<br />
 <br />
 Após isso seu servidor deverá estar em funcionamento na url `http://localhost/api`
